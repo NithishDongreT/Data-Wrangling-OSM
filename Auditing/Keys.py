@@ -1,3 +1,9 @@
+import xml.etree.cElementTree as ET
+import pprint
+import re
+
+
+filename = 'sample20.osm'
 #3 regular expressions to compare the key
 lower = re.compile(r'^([a-z]|_)*$')#To check if key has only alphabets or underscore
 lower_colon = re.compile(r'^([a-z]|_)*:([a-z]|_)*$')#To check if key has multiple : symbols 
