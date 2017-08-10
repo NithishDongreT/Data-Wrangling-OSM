@@ -1,4 +1,9 @@
 #Auditing for Postal Codes...
+import xml.etree.cElementTree as ET
+import pprint
+import re
+
+filename = 'sample20.osm'
 def check_postal_code(postal_code):#function used to check postal codes...
     if postal_code.startswith('560'):#to check if code starts with 560...
         try:
