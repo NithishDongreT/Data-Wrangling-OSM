@@ -107,3 +107,92 @@ Also above map is of my hometown, so I’m more interested to see what database 
     rotork.com
     Www.hajiameengroup.in
     ```
+## Data Overview and Additional Ideas
+  This section contains basic statistics about the dataset, 
+  the SQL queries used to gather them, and some additional ideas about the data in context.
+  
+  ### File sizes
+    banglore.osm: 52 MB
+    nodes_csv: 19 MB
+    nodes_tags.csv: 374 KB
+    ways_csv: 3.2 MB
+    ways_nodes.csv: 6.7 MB
+    ways_tags.csv: 1.9 MB
+    banglore.db: 35.5 MB
+  
+  #### No. of nodes
+    SELECT COUNT(*) FROM nodes;
+  232364
+  
+  #### No. of ways
+    SELECT COUNT(*) FROM ways;
+  54677
+  
+  #### No. of Unique Users
+     SELECT COUNT(DISTINCT(e.uid)) \
+            FROM (SELECT uid FROM nodes UNION ALL SELECT uid FROM ways) e;
+  742
+  
+  #### Top Contributing Users
+    SELECT e.user, COUNT(*) as num \
+            FROM (SELECT user FROM nodes UNION ALL SELECT user FROM ways) e \
+            GROUP BY e.user \
+            ORDER BY num DESC \
+            LIMIT 10;
+  [('sdivya', 15033),
+  ('PlaneMad', 13196),
+  ('Navaneetha', 11071),
+  ('bindhu', 10585),
+  ('himalay', 10403),
+  ('pvprasad', 10260),
+  ('subhashini', 9089),
+  ('premkumar', 8952),
+  ('saikumar', 7691),
+  ('jasvinderkaur', 7633)]
+  
+  #### Number of users contributing only once
+    SELECT COUNT(*) \
+            FROM \
+                (SELECT e.user, COUNT(*) as num \
+                 FROM (SELECT user FROM nodes UNION ALL SELECT user FROM ways) e \
+                 GROUP BY e.user \
+                 HAVING num=1) u;
+  242
+  
+  #### Common amenities:
+    SELECT value, COUNT(*) as num \
+            FROM nodes_tags \
+            WHERE key="amenity" \
+            GROUP BY value \
+            ORDER BY num DESC \
+            LIMIT 10;
+  ('restaurant', 187)
+  ('bank', 110)
+  ('pharmacy', 68)
+  ('atm', 67)
+  ('place_of_worship', 66)
+  ('fast_food', 63)
+  ('cafe', 51)
+  ('school', 44)
+  ('bench', 39)
+  ('hospital', 37)
+  
+  #### Important cuisines
+    SELECT nodes_tags.value, COUNT(*) as num \
+            FROM nodes_tags \
+                JOIN (SELECT DISTINCT(id) FROM nodes_tags WHERE value="restaurant") i \
+                ON nodes_tags.id=i.id \
+            WHERE nodes_tags.key="cuisine" \
+            GROUP BY nodes_tags.value \
+            ORDER BY num DESC \
+            LIMIT 10;
+  ('regional', 36)
+  ('indian', 26)
+  ('international', 6)
+  ('pizza', 6)
+  ('chinese', 5)
+  ('vegetarian', 4)
+  ('ice_cream', 3)
+  ('meals', 2)
+  ('seafood', 2)
+  ('Andhra', 1)
