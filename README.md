@@ -1,6 +1,6 @@
 # Data-Wrangling-OSM
 
-### Map Area
+## Map Area
 
 [Bangaluru](http://overpass-api.de/api/map?bbox=77.5044,12.9305,77.6788,13.0280),India
 
@@ -196,3 +196,27 @@ Also above map is of my hometown, so I’m more interested to see what database 
   ('meals', 2)
   ('seafood', 2)
   ('Andhra', 1)
+  
+  ## Conclusions
+  
+  The OpenStreetMap data of bangluru is of fairly reasonable quality but the typo errors caused by the human inputs are significant.
+  We have cleaned a significant amount of the data which is required for this project.
+
+1. Correcting Web site Names
+    * Benifits 
+        1. It is a correct way to spacify a address
+        2. It will give complete address to website with protocol for protection
+    * Anticipated Issue
+        1. It might not be understandable by Every one.
+        2. For Some people it migth be difficult to identify the address
+2. Correcting Street Names
+    * Benifits
+        1. We will know full address or street name of the place
+    * Anticipated Issue
+        1. Local People migth not understand full name because they migth have used shortcut names only.
+3. Correcting Phone Numbers
+    * Benifits
+        1. Each number will have a format that it starts with +91 and followed by 10 digits
+    * Anticipated Issue
+        1. Cannot differentiate between cell phone number and landline number
+        2. For some people if they do not know what is +91 then they will get confused and some people migth understand only older     format.
