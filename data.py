@@ -5,7 +5,6 @@ from unittest import TestCase
 import cerberus
 import schema
 import xml.etree.cElementTree as ET
-import pprint
 import re
 
 OSM_PATH = 'banglore.osm'
