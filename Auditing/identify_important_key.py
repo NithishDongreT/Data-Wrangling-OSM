@@ -1,5 +1,10 @@
 #helps to identify important tag keys in the sample data.
 #Here we will ctreat a dictionary holding key as key name and value as number of times it has appeard.
+import xml.etree.cElementTree as ET
+import pprint
+import re
+
+filename = 'sample20.osm'
 node_tag_keys = dict()
 for _, element in ET.iterparse(filename):
     if element.tag == 'node':
